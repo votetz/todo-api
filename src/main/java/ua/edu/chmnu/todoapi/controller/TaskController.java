@@ -1,7 +1,11 @@
-package ua.edu.chmnu.todoapi;
+package ua.edu.chmnu.todoapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ua.edu.chmnu.todoapi.model.Task;
+import ua.edu.chmnu.todoapi.service.TaskService;
+import ua.edu.chmnu.todoapi.dto.CreateTaskRequest;
+import ua.edu.chmnu.todoapi.dto.UpdateTaskRequest;
 
 import java.util.List;
 
