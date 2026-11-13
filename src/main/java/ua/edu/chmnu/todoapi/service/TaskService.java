@@ -1,11 +1,10 @@
 package ua.edu.chmnu.todoapi.service;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-import ua.edu.chmnu.todoapi.model.Task;
 import ua.edu.chmnu.todoapi.dto.CreateTaskRequest;
 import ua.edu.chmnu.todoapi.dto.UpdateTaskRequest;
+import ua.edu.chmnu.todoapi.exception.TaskNotFoundException;
+import ua.edu.chmnu.todoapi.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ public class TaskService {
         return tasks.stream()
                 .filter(task -> task.id().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new TaskNotFoundException(id));
     }
 
     public Task create(CreateTaskRequest request) {
@@ -43,7 +42,7 @@ public class TaskService {
         if (tasks.removeIf(task -> task.id().equals(id))) {
             return;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        throw new TaskNotFoundException(id);
     }
 
     public void update(Long id, UpdateTaskRequest request) {
@@ -55,6 +54,6 @@ public class TaskService {
                 return;
             }
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        throw new TaskNotFoundException(id);
     }
 }

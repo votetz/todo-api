@@ -1,5 +1,6 @@
 package ua.edu.chmnu.todoapi.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.edu.chmnu.todoapi.model.Task;
@@ -30,7 +31,7 @@ public class TaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Task createTask(@RequestBody CreateTaskRequest request) {
+    public Task createTask(@RequestBody @Valid CreateTaskRequest request) {
         return taskService.create(request);
     }
 
@@ -42,7 +43,7 @@ public class TaskController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTask(@PathVariable Long id, @RequestBody UpdateTaskRequest request) {
+    public void updateTask(@PathVariable Long id, @Valid @RequestBody UpdateTaskRequest request) {
         taskService.update(id, request);
     }
 }

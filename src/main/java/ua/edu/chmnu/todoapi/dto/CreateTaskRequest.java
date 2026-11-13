@@ -1,3 +1,5 @@
 package ua.edu.chmnu.todoapi.dto;
 
-public record CreateTaskRequest(String title) {}
+import jakarta.validation.constraints.NotBlank;
+
+public record CreateTaskRequest(@NotBlank String title) {}
